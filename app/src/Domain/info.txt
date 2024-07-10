@@ -1,0 +1,11 @@
+Domain/
+Entities/
+ValueObjects/
+Repositories/ (tylko interfejsy)
+Services/
+Events/
+Exceptions/
+
+W tym katalogu umieszczasz całą logikę biznesową,
+encje, obiekty wartości, interfejsy repozytoriów,
+serwisy domenowe, zdarzenia domenowe i wyjątki.

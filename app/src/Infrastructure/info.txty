@@ -1,0 +1,8 @@
+Infrastructure/
+Repository/ (implementacje interfejsów z Domain)
+Persistence/
+ExternalServices/
+Messaging/
+Security/
+W tym katalogu umieszczasz implementacje repozytoriów, konfiguracje bazy danych,
+ integracje z zewnętrznymi serwisami, obsługę komunikacji (np. AMQP, Redis), oraz komponenty związane z bezpieczeństwem.
