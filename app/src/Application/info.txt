@@ -1,0 +1,8 @@
+Application/
+Command/
+CommandHandler/
+Query/
+QueryHandler/
+DTO/
+Services/
+Tutaj znajdują się komendy, zapytania, handlery dla komend i zapytań, obiekty DTO (Data Transfer Objects) oraz serwisy aplikacyjne.

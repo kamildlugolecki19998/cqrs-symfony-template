@@ -1,0 +1,83 @@
+version: '3'
+
+services:
+  apache:
+    build:
+      context: .
+      dockerfile: ./apache/Dockerfile
+    # env_file:
+    #   - .env
+    ports:
+      - '80:80'
+    profiles:
+      [ "all", "php", "me"]
+    volumes:
+      - ./app:/var/www/html
+    networks:
+      - elastic
+      - main
+
+  elasticsearch:
+    image: elasticsearch:8.8.0
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    # profiles: ["all", "search", "php"]
+    networks:
+      - elastic
+      - main
+
+  kibana:
+    image: kibana:8.8.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=${ELASTICSEARCH_HOSTS}
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+    profiles: ["all", "search"]
+    networks:
+      - elastic
+
+  database:
+    container_name: mysql
+    image: mysql:8.4.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+    ports:
+      - "3306:3306"
+    profiles: ["all", "search", "php"]
+    networks:
+      - main
+      - db_network
+    volumes:
+      - my-db:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - database
+    environment:
+      PMA_HOST: ${PMA_HOST}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  
+    ports:
+      - "8081:80"
+    profiles: ["all", "search", "php"]  
+    networks:
+      - db_network
+
+networks:
+  db_network:
+  elastic:
+  main:
+
+volumes:
+  my-db:

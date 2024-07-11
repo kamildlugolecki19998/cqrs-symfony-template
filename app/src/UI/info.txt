@@ -1,0 +1,6 @@
+UI/
+Controller/
+Form/
+ViewModel/
+Tutaj znajdują się kontrolery, formularze i modele widoku dla interfejsu użytkownika.
+Dodatkowo, możesz utworzyć katalog Shared/ na tym samym poziomie co powyższe katalogi, aby przechowywać współdzielone komponenty, takie jak:
