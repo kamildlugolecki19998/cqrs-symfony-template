@@ -7,8 +7,8 @@ controllers:
 
 app_domain_controllers:
     resource:
-        path: ../src/Domain
-        namespace: App\Domain\
+        path: ../src/UI/Controller
+        namespace: App\UI\Controller
     type: attribute
 
 # app_test_controllers:

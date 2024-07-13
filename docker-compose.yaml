@@ -14,7 +14,6 @@ services:
     volumes:
       - ./app:/var/www/html
     networks:
-      - elastic
       - main
 
   elasticsearch:
@@ -25,9 +24,8 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
-    # profiles: ["all", "search", "php"]
+    profiles: ["all", "search", "php"]
     networks:
-      - elastic
       - main
 
   kibana:
@@ -41,10 +39,10 @@ services:
       - elasticsearch
     profiles: ["all", "search"]
     networks:
-      - elastic
+      - main
 
   database:
-    container_name: mysql
+    # container_name: mysql
     image: mysql:8.4.0
     restart: always
     environment:
@@ -57,7 +55,6 @@ services:
     profiles: ["all", "search", "php"]
     networks:
       - main
-      - db_network
     volumes:
       - my-db:/var/lib/mysql
 
@@ -72,12 +69,12 @@ services:
       - "8081:80"
     profiles: ["all", "search", "php"]  
     networks:
-      - db_network
+      - main
 
 networks:
-  db_network:
-  elastic:
   main:
+  # db_network:
+  # elastic:
 
 volumes:
   my-db:
