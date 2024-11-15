@@ -1,0 +1,3 @@
+Moduł wspódzielone 
+Command and Query iterfaces, buses, hadler interface 
+zoribć domain katalog dla query i command 
